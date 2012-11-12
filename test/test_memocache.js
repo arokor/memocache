@@ -51,5 +51,25 @@
       assert(b.time > c.time);
     });
   });
+
+  describe('Memocache specified size', function() {
+
+    it('should respect cache size', function() {
+      var f = function(n) { return n; };
+      var ff = function(n) { return f(n); };
+      var fc = mc.memoize(ff, 5);
+      fc(1);
+      fc(2);
+      fc(3);
+      fc(4);
+      fc(5);
+      fc(6);
+
+      f = function(n) { return -1; };
+
+      assert.strictEqual(fc(1), -1); // miss
+      assert.strictEqual(fc(3), 3); // hit
+    });
+  });
 }());
 
