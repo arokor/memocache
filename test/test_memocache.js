@@ -23,7 +23,7 @@
     });
 
     it('should cache', function() {
-      var n = 25;
+      var n = 30;
       var t1;
 
       t1 = Date.now();
